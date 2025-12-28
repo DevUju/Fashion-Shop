@@ -1,0 +1,12 @@
+
+<div class="header">
+    <img src="../assets/images/fashion-logo.jpg" alt="Logo" width="200">
+    <app-search (searchQuery)="onSearchNav($event)"></app-search>
+    <nav class="cart">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count">{{ cartCounter() }}</span>
+    </nav>
+
+</div>
+
+

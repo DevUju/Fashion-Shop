@@ -1,0 +1,8 @@
+<div class="all-products">
+    <div class="product" *ngFor="let product of data" (click)="selectProduct(product)">
+        <img [src]="product.imageUrl" alt="bangles">
+        <h4>{{ product.name }}</h4>
+        <p>{{ product.description }}</p>
+        <h4>{{ product.price | currency:'NGN' }}</h4>
+    </div>
+</div>

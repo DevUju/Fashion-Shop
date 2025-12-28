@@ -1,0 +1,10 @@
+<div class="search">
+  <input
+    name="search"
+    type="text"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearch($event)"
+    (keydown.enter)="$event.preventDefault()"
+    placeholder="Search products..."
+  />
+</div>
