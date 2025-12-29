@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Product implements OnInit {
 
+  selectedProductIds: number[] = [];
   @Input() data!: IProduct[];
   @Output() productSelected = new EventEmitter<IProduct>();
 
@@ -18,5 +19,15 @@ export class Product implements OnInit {
 
   selectProduct(product: IProduct): void {
     this.productSelected.emit(product);
+
+    const index = this.selectedProductIds.indexOf(product.id);
+
+    if (index === -1) {
+      this.selectedProductIds.push(product.id);
+    } 
+    // else {
+    //   this.selectedProductIds.splice(index, 1);
+    // }
   }
+
 }

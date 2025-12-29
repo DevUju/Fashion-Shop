@@ -2,7 +2,6 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from '../navbar/navbar';
 import { Product } from '../product/product';
-import { CommonModule } from '@angular/common';
 import { IProduct } from '../shared/interfaces/products.interface';
 
 @Component({

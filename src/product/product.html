@@ -1,8 +1,13 @@
 <div class="all-products">
-    <div class="product" *ngFor="let product of data" (click)="selectProduct(product)">
-        <img [src]="product.imageUrl" alt="bangles">
-        <h4>{{ product.name }}</h4>
-        <p>{{ product.description }}</p>
-        <h4>{{ product.price | currency:'NGN' }}</h4>
+    <div class="product" *ngFor="let product of data" (click)="selectProduct(product)" [ngStyle]="selectedProductIds.includes(product.id)
+         ? { 'background-color': '#ffdaab' }
+         : {}">
+
+        <img [src]="product.imageUrl" alt="product.name">
+        <div class="product-details">
+            <h4>{{ product.name }}</h4>
+            <p>{{ product.description }}</p>
+            <h4 style="margin-top: 10px; border: 1px solid #e59483; text-align: center; border-radius: 60px;">{{ product.price | currency:'NGN':'symbol' }}</h4>
+        </div>
     </div>
 </div>
