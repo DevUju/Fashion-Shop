@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IProductList } from '../../shared/interfaces/products.interface';
 import { Navbar } from '../../navbar/navbar';
-import { ProductList } from '../../product-list/product-list';
 import { ProductService } from '../services/product';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Navbar, ProductList],
+  imports: [CommonModule, Navbar],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })

@@ -4,7 +4,6 @@ import { Home } from './home/home';
 import { Cart } from './cart/cart';
 import { Notfound } from './notfound/notfound';
 import { ProductDetail } from './product-detail/product-detail';
-import { ProductList } from '../product-list/product-list';
 
 export const routes: Routes = [
     {path: '', component: Home},
