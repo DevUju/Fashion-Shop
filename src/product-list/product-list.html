@@ -6,8 +6,10 @@
         <img [src]="product.imageUrl" alt="product.name">
         <div class="product-details">
             <h4>{{ product.name }}</h4>
-            <p>{{ product.description }}</p>
-            <h4 style="margin-top: 10px; border: 1px solid #e59483; text-align: center; border-radius: 60px;">{{ product.price | currency:'NGN':'symbol' }}</h4>
+            <p style="color: grey;">{{ product.description }}</p>
+            <p style="color: #e59483; text-align: center;">Rating: {{ product.rating }}</p>
+            <p style="color: #e59483; text-align: center;">{{ product.instock ? 'In Stock' : 'Out of Stock' }}</p>
+            <h4 style="border-radius: 20px; border: 3px solid #e59483; text-align: center;">{{ product.price | currency:'NGN':'symbol' }}</h4>
         </div>
     </div>
 </div>

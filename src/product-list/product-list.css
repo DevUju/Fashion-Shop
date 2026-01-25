@@ -42,9 +42,29 @@
    width: 80%;
 }
 
+.product-details h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 8px 0;
+  color: #333;
+}
+
+.product-details p {
+  font-size: 0.95rem;
+  margin: 6px 0;
+  color: #555;
+  text-align: justify;
+  align-items: center;
+}
+
+.product-details h4:last-of-type {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e59483;
+}
 
 .all-products h4 {
-    font-size: 40x;
+    font-size: 20px;
     color: #e59483;
     justify-content: center;
     align-items: center;

@@ -1,4 +1,4 @@
 <div>
   <app-navbar [cartCounter]="cartCount" (getSearchQueryNav)="onSearchApp($event)"></app-navbar>
-  <app-product [data]="data" (productSelected)="onProductSelected($event)" (singleData)="onProductDetails($event)"></app-product>
+  <app-product-list [data]="filteredData" (productSelected)="onProductSelected($event)" (singleData)="onProductDetails($event)"></app-product-list>
 </div>

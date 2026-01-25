@@ -1,0 +1,62 @@
+{
+    "products": [{
+      "id": 1,
+      "name": "Bangles",
+      "description": "Bangles that add grace to every movement. Simple, stylish, and made to shine.",
+      "price": 50000.00,
+      "category": "Jewelry",
+      "imageUrl": "../assets/images/bangles.jpg",
+      "instock": true,
+      "rating": 4.5
+    },
+    {
+      "id": 2,
+      "name": "Diamond Earrings",
+      "description": "Pure diamonds, perfectly set. Effortless sparkle for every moment.",
+      "price": 100000.00,
+      "category": "Jewelry",
+      "imageUrl": "../assets/images/diamond-earrings.jpg",
+      "instock": true,
+      "rating": 4.8 
+    },
+    {
+      "id": 3,
+      "name": "Jewelry",
+      "description": "Thoughtfully designed jewelry for everyday elegance. Simple, refined, and unforgettable.",
+      "price": 70000.00,
+      "category": "Jewelry",
+      "imageUrl": "../assets/images/jewelry-set.jpg",
+      "instock": true,
+      "rating": 4.6
+    },
+    {
+      "id": 4,
+      "name": "Glass Frame",
+      "description": "Frames that define your look. Designed to stand out, built to last.",
+      "price": 30000.00,
+      "category": "Accessories",
+      "imageUrl": "../assets/images/glass-frame.jpg",
+      "instock": true,
+      "rating": 4.3
+    },
+    {
+      "id": 5,
+      "name": "Wedding Rings",
+      "description": "Exquisite wedding rings made with devotion. Where commitment meets craftsmanship.",
+      "price": 500000.00,
+      "category": "Jewelry",
+      "imageUrl": "../assets/images/wedding-rings.jpg",
+      "instock": true,    
+      "rating": 4.9 
+    },
+    {
+      "id": 6,
+      "name": "Wrist Watch",
+      "description": "Reliable wristwatches for daily wear. Simple, durable, and stylish.",
+      "price": 40000.00,
+      "category": "Accessories",
+      "imageUrl": "../assets/images/wristwatch.jpg",
+      "instock": true,  
+      "rating": 4.7
+    }]
+}

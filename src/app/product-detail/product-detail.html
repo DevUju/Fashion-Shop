@@ -1,1 +1,13 @@
-<p>product-detail works!</p>
+<h1>Product Details</h1>
+
+<div class="product-details" *ngIf="selectedProduct">
+        <img [src]="selectedProduct.imageUrl" alt="{{ selectedProduct.name }}" class="product-image" />
+        <div class="product-info">
+            <h2>{{ selectedProduct.name }}</h2>
+            <p class="product-price">{{ selectedProduct.price | currency:'NGN':'symbol' }}</p>
+            <p class="product-description">{{ selectedProduct.description }}</p>
+        </div>
+    <button class="add-to-cart-button">Add to Cart</button>
+    <!-- <button class="back-button" routerLink="/">Back to Products</button> -->
+</div>
+

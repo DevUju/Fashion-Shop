@@ -1,106 +1,89 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IProduct } from '../../shared/interfaces/products.interface';
+import { IProductList } from '../../shared/interfaces/products.interface';
 import { Navbar } from '../../navbar/navbar';
-import { Product } from '../../product/product';
+import { ProductList } from '../../product-list/product-list';
+import { ProductService } from '../services/product';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Navbar, Product],
+  imports: [CommonModule, Navbar, ProductList],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-export class Home implements OnInit{
+export class Home implements OnInit {
   protected readonly title = signal('fashion-store');
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private productService: ProductService) { }
 
-  protected data!: IProduct[];
+  prod: IProductList[] = []
   cartCount = signal(0);
-  filteredData!: IProduct[];
+  filteredData: IProductList[] = []
 
   ngOnInit(): void {
-      this.productData();
+    this.productService.getAllProducts().subscribe((products) => {
+      this.prod = products;
+      this.filteredData = products;
+      console.log("Home Component Initialized", this.prod);
+    });
   }
 
-  async productData(): Promise<IProduct[]> {
-    return this.data = [
-      {
-      id: 1,
-      name: "Bangles",
-      imageUrl: "../assets/images/bangles.jpg",
-      description: "Bangles that add grace to every movement. Simple, stylish, and made to shine.",
-      price: 50000.00
-    },
-    {
-      id: 2,
-      name: "Diamond Earrings",
-      imageUrl: "../assets/images/diamond-earrings.jpg",
-      description: "Pure diamonds, perfectly set. Effortless sparkle for every moment.",
-      price: 100000.00
-    },
-    {
-      id: 3,
-      name: "Jewelry",
-      imageUrl: "../assets/images/jewelry-set.jpg",
-      description: "Thoughtfully designed jewelry for everyday elegance. Simple, refined, and unforgettable.",
-      price: 70000.00
-    },
-    {
-      id: 4,
-      name: "Glass Frame",
-      imageUrl: "../assets/images/glass-frame.jpg",
-      description: "Frames that define your look. Designed to stand out, built to last.",
-      price: 30000.00
-    },
-    {
-      id: 5,
-      name: "Wedding Rings",
-      imageUrl: "../assets/images/wedding-rings.jpg",
-      description: "Exquisite wedding rings made with devotion. Where commitment meets craftsmanship.",
-      price: 500000.00
-    },
-    {
-      id: 6,
-      name: "Wrist Watch",
-      imageUrl: "../assets/images/wristwatch.jpg",
-      description: "Reliable wristwatches for daily wear. Simple, durable, and stylish.",
-      price: 40000.00
-    }
-  ]
-  }
+  // async productData(): Promise<void> {
+  //   const response = await this.productService.getAllProducts();
+  //   const products = await response.json();
+  //   this.prod = products;
+  //   this.filteredData = products;
+  // }
 
-  onProductSelected(product: IProduct): void {
+  onProductSelected(product: IProductList): void {
     if (product) {
       this.cartCount.update(count => count + 1);
     }
   }
 
-  onSearchApp(query: string): void {   
+  // async onSearchApp(query: string): Promise<void> {   
 
-    if (query.length > 0){
-      this.productData();
+  //   if (query.length > 0){
+  //     await this.productData();
+  //     this.filterProducts(query);
+  //     this.prod = this.filteredData;
+  //   }
+  //   if (query === '') {
+  //     await this.productData();
+  //   }
+  // }
+
+  // filterProducts(query: string): void {
+  //   const lowerQuery = query.toLowerCase();
+  //   this.filteredData = this.prod.filter(product =>
+  //     product.name.toLowerCase().includes(lowerQuery));
+  // }
+
+  //  onProductDetails(productId: number): void {
+  //    this.router.navigate(["/product", productId]);
+  // }
+
+  onSearchApp(query: string): void {
+    if (query.length > 0) {
       this.filterProducts(query);
-      this.data = this.filteredData;
-    }
-    if (query === '') {
-      this.productData();
+      this.prod = this.filteredData; // keep prod in sync with filtered results
+    } else {
+      // reset to full list without re-fetching
+      this.filteredData = this.prod;
     }
   }
 
   filterProducts(query: string): void {
     const lowerQuery = query.toLowerCase();
-    this.filteredData = this.data.filter(product =>
-      product.name.toLowerCase().includes(lowerQuery));
+    this.filteredData = this.prod.filter(product =>
+      product.name.toLowerCase().includes(lowerQuery)
+    );
   }
 
-   onProductDetails(productId: number): void {
-     this.router.navigate(["/product", productId]);
+  onProductDetails(productId: number): void {
+    this.router.navigate(["/product", productId]);
   }
 
-  test(){
-    this.router.navigate(["/desmond"]);
-  }
 }

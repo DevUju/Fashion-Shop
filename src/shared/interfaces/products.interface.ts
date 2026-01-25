@@ -1,7 +1,10 @@
-export interface IProduct{
+export interface IProductList{
     id: number;
     name: string;
-    imageUrl: string;
     description: string;
     price: number;
+    category?: string;
+    imageUrl: string;
+    instock?: boolean;
+    rating?: number
 }
