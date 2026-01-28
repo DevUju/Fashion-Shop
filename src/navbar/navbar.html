@@ -1,10 +1,19 @@
-<div class="header">
-    <div class="subheader">
-        <img src="../assets/images/fashion-logo.jpg" alt="Logo" width="200">
-        <app-search (searchQuery)="onSearchNav($event)"></app-search>
-        <nav class="cart">
-            <span class="cart-icon">🛒</span>
-            <span class="cart-count">{{ cartCounter() }}</span>
-        </nav>
+<header class="navbar">
+    <div class="navbar-container">
+        <div class="brand-section">
+            <img src="../assets/images/fashion-logo.jpg" alt="Fashion Shop Logo" class="logo">
+            <h1 class="brand-name">Fashion Shop</h1>
+        </div>
+        
+        <div class="search-section">
+            <app-search (searchQuery)="onSearchNav($event)"></app-search>
+        </div>
+        
+        <div class="cart-section">
+            <div class="cart-button">
+                <span><a routerLink="/cart"><span class="cart-icon">🛒</span></a></span>
+                <!-- <span class="cart-badge" *ngIf="cartCounter() > 0">{{ getTotalCart }}</span> -->
+            </div>
+        </div>
     </div>
-</div>
+</header>

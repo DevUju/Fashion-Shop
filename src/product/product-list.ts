@@ -12,22 +12,15 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductList implements OnInit {
 
-  selectedProductIds: number[] = [];
-  selectedProductId: number = 0;
+  selectedProductIds: string[] = [];
+  selectedProductId: string = '';
   @Input() data: IProductList[] = [];
   @Output() productSelected = new EventEmitter<IProductList>();
-  @Output() singleData = new EventEmitter<number>();
+  @Output() singleData = new EventEmitter<{productId: string, category: string}>();
 
   constructor() { }
 
-  ngOnInit(): void {
-    if (!this.data || this.data.length === 0) {
-      console.warn("Product List received no data");
-    } else {
-      console.log("Product List Initialized", this.data);
-    }
-
-  }
+  ngOnInit(): void {}
 
   selectProduct(product: IProductList): void {
     this.productSelected.emit(product);
@@ -44,7 +37,8 @@ export class ProductList implements OnInit {
 
   productDetails(product: IProductList): void {
     const singleProduct = product.id;
-    this.singleData.emit(singleProduct);
+    const category = product.category as string;
+    this.singleData.emit({productId: singleProduct, category: category});
   }
 
 }

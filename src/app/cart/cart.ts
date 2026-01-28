@@ -1,11 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import { CartService } from '../services/cart';
+import { CommonModule } from '@angular/common';
+import { Navbar } from '../../navbar/navbar';
 
 @Component({
   selector: 'app-cart',
-  imports: [],
+  imports: [CommonModule, Navbar],
   templateUrl: './cart.html',
-  styleUrl: './cart.css',
+  styleUrls: ['./cart.css']
 })
-export class Cart {
+export class Cart implements OnInit {
+  cartCounter = signal<number>(0); 
+  cartItems: any[] = [];
 
+  constructor(private cartService: CartService) { }
+
+  ngOnInit() {
+    this.cartService.cart$.subscribe(items => {
+      this.cartItems = items;
+      return this.cartService.getCartItems()
+    });
+  }
+
+  getTotal(): number {
+    return this.cartItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  }
+
+  removeItem(productId: number): void {
+    this.cartService.removeFromCart(productId);
+  }
 }

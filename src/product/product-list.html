@@ -1,32 +1,21 @@
-<div class="all-products">
-    <div class="product" *ngFor="let product of data" (click)="productDetails(product)" style="cursor: pointer;" [ngStyle]="selectedProductIds.includes(product.id)
-         ? { 'background-color': '#ffdaab' }
-         : {}">
-
-        <img [src]="product.imageUrl" alt="product.name">
-        <div class="product-details">
-            <h4>{{ product.name }}</h4>
-            <p style="color: grey;">{{ product.description }}</p>
-            <p style="color: #e59483; text-align: center;">Rating: {{ product.rating }}</p>
-            <p style="color: #e59483; text-align: center;">{{ product.instock ? 'In Stock' : 'Out of Stock' }}</p>
-            <h4 style="border-radius: 20px; border: 3px solid #e59483; text-align: center;">{{ product.price | currency:'NGN':'symbol' }}</h4>
+<div class="products-container">
+    <div class="product-card" *ngFor="let product of data" (click)="productDetails(product)">
+        <div class="product-image-wrapper">
+            <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+            <div class="stock-badge" [class.in-stock]="product.instock" [class.out-of-stock]="!product.instock">
+                {{ product.instock ? 'In Stock' : 'Out of Stock' }}
+            </div>
+        </div>
+        <div class="product-content">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            <div class="product-footer">
+                <div class="rating" *ngIf="product.rating">
+                    <span class="star">⭐</span>
+                    <span class="rating-value">{{ product.rating }}</span>
+                </div>
+                <div class="price-tag">{{ product.price | currency:'NGN':'symbol' }}</div>
+            </div>
         </div>
     </div>
 </div>
-
-<!-- <div class="all-products">
-    <div class="product" *ngFor="let product of data" [routerLink]="['/product', product.id]" style="cursor: pointer;"
-        [ngStyle]="selectedProductIds.includes(product.id)
-         ? { 'background-color': '#ffdaab' }
-         : {}">
-
-        <img [src]="product.imageUrl" alt="{{ product.name }}">
-        <div class="product-details">
-            <h4>{{ product.name }}</h4>
-            <p>{{ product.description }}</p>
-            <h4 style="margin-top: 10px; border: 1px solid #e59483; text-align: center; border-radius: 60px;">
-                {{ product.price | currency:'NGN':'symbol' }}
-            </h4>
-        </div>
-    </div>
-</div> -->

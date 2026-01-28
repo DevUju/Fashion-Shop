@@ -1,36 +1,85 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, signal, NgZone, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { ProductService } from '../services/product';
 import { IProductList } from '../../shared/interfaces/products.interface';
 import { CommonModule } from '@angular/common';
+import { Navbar } from '../../navbar/navbar';
+import { CartService } from '../services/cart';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, Navbar],
   templateUrl: './product-detail.html',
-  styleUrl: './product-detail.css',
+  styleUrls: ['./product-detail.css'],
 })
 export class ProductDetail implements OnInit {
+  cartCounter = signal<number>(0); 
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
-  constructor(private productService: ProductService, private router: ActivatedRoute) { }
+  constructor(
+    private productService: ProductService, 
+    private router: ActivatedRoute,
+    private routerService: Router,
+    private ngZone: NgZone,
+    private cartService: CartService
+  ) { 
+    console.log('Constructor - isBrowser:', this.isBrowser);
+  }
   productId: string | null = null;
-
-  selectedProduct: IProductList = {} as IProductList;
-  product: IProductList[] = [] as IProductList[];
+  category: string | null = null;
+  selectedProduct = signal<IProductList | null>(null);
+  isLoading = signal<boolean>(true);
 
   ngOnInit(): void {
-    this.productId = this.router.snapshot.paramMap.get('id')
-    this.getProductDetails();
+    this.productId = this.router.snapshot.paramMap.get('id');
+    this.category = this.router.snapshot.paramMap.get('name');
+    
+    if (this.productId) {
+      this.getProductDetails();
+    }
+    
+    this.router.paramMap.subscribe(params => {
+      const newId = params.get('id');
+      if (newId && newId !== this.productId) {
+        this.productId = newId;
+        this.getProductDetails();
+      }
+    });
   }
-
 
   getProductDetails(): void {
     if (this.productId) {
-      this.productService.getProductById(this.productId).subscribe((product) => {
-        this.selectedProduct = product;
+      this.ngZone.run(() => {
+        this.isLoading.set(true);
       });
+      this.productService.getProductById(this.productId).subscribe({
+        next: (product) => {
+          this.ngZone.run(() => {
+            this.selectedProduct.set(product);
+            this.isLoading.set(false);
+          });
+        },
+        error: (error) => {
+          console.error('Error loading product:', error);
+          this.ngZone.run(() => {
+            this.isLoading.set(false);
+          });
+        }
+      });
+    } else {
+      console.error('No product ID found in route');
+      this.isLoading.set(false);
     }
-
   }
 
+  addToCart() {
+    const product = this.selectedProduct();   // ✅ call signal to get value
+    if (product) {
+      this.cartService.addToCart(product);
+      this.routerService.navigate(['/cart']);
+    }
+    
+  }
 }

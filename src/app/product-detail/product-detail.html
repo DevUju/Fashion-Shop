@@ -1,13 +1,65 @@
-<h1>Product Details</h1>
+<!-- Debug: isLoading={{isLoading()}}, hasProduct={{!!selectedProduct()}} -->
 
-<div class="product-details" *ngIf="selectedProduct">
-        <img [src]="selectedProduct.imageUrl" alt="{{ selectedProduct.name }}" class="product-image" />
-        <div class="product-info">
-            <h2>{{ selectedProduct.name }}</h2>
-            <p class="product-price">{{ selectedProduct.price | currency:'NGN':'symbol' }}</p>
-            <p class="product-description">{{ selectedProduct.description }}</p>
+<app-navbar [cartCounter]="cartCounter"></app-navbar>
+
+
+<div class="loading-state" *ngIf="isLoading()">
+    <div class="spinner"></div>
+    <p>Loading product details...</p>
+</div>
+
+<div class="detail-container" *ngIf="!isLoading() && selectedProduct()">
+    <div class="breadcrumb">
+        <a routerLink="/" class="breadcrumb-link">Home</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">{{ selectedProduct()?.name }}</span>
+    </div>
+
+    <div class="product-detail-card">
+        <div class="image-section">
+            <img [src]="selectedProduct()?.imageUrl" [alt]="selectedProduct()?.name" class="detail-image" />
+            <div class="stock-indicator" [class.in-stock]="selectedProduct()?.instock" [class.out-of-stock]="!selectedProduct()?.instock">
+                <span class="stock-icon">{{ selectedProduct()?.instock ? '✓' : '✕' }}</span>
+                <span class="stock-text">{{ selectedProduct()?.instock ? 'In Stock' : 'Out of Stock' }}</span>
+            </div>
         </div>
-    <button class="add-to-cart-button">Add to Cart</button>
-    <!-- <button class="back-button" routerLink="/">Back to Products</button> -->
+
+        <div class="info-section">
+            <h1 class="product-title">{{ selectedProduct()?.name }}</h1>
+            
+            <div class="rating-section" *ngIf="selectedProduct()?.rating">
+                <div class="stars">
+                    <span class="star">⭐</span>
+                    <span class="rating-number">{{ selectedProduct()?.rating }}</span>
+                </div>
+            </div>
+
+            <div class="price-section">
+                <span class="price-label">Price:</span>
+                <span class="price-value">{{ selectedProduct()?.price | currency:'NGN':'symbol' }}</span>
+            </div>
+
+            <div class="description-section">
+                <h3 class="section-title">Description</h3>
+                <p class="description-text">{{ selectedProduct()?.description }}</p>
+            </div>
+
+            <div class="category-section" *ngIf="category">
+                <span class="category-label">Category:</span>
+                <span class="category-badge">{{ category }}</span>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-add-cart" [disabled]="!selectedProduct()?.instock" (click)="addToCart()">
+                    <span class="btn-icon">🛒</span>
+                    <span >{{ selectedProduct()?.instock ? 'Add to Cart' : 'Out of Stock' }}</span>
+                </button>
+                <button class="btn-back" routerLink="/">
+                    <span class="btn-icon">←</span>
+                    <span>Back to Products</span>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 

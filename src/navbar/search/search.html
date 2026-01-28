@@ -1,10 +1,14 @@
-<div class="search">
-  <input
-    name="search"
-    type="text"
-    [(ngModel)]="searchTerm"
-    (ngModelChange)="onSearch($event)"
-    (keydown.enter)="$event.preventDefault()"
-    placeholder="Search products..."
-  />
+<div class="search-container">
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input
+      name="search"
+      type="text"
+      class="search-input"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearch($event)"
+      (keydown.enter)="$event.preventDefault()"
+      placeholder="Search products..."
+    />
+  </div>
 </div>
