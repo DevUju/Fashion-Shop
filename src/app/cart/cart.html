@@ -12,5 +12,11 @@
   <div class="cart-total">
     Total: {{ getTotal() | currency:'NGN':'symbol' }}
   </div>
-  <button>Checkout</button>
+  <div class="cart-actions">
+    <button class="btn-back" (click)="goBack()">
+      <span class="btn-icon">←</span>
+      <span>Back to Products</span>
+    </button>
+    <button class="btn-checkout">Checkout</button>
+  </div>
 </div>

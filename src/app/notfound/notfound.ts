@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notfound',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './notfound.css',
 })
 export class Notfound {
+  constructor(private router: Router) {}
 
+  goBack(): void {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/']);
+    });
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CartService } from '../services/cart';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../../navbar/navbar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ export class Cart implements OnInit {
   cartCounter = signal<number>(0); 
   cartItems: any[] = [];
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private router: Router) { }
 
   ngOnInit() {
     this.cartService.cart$.subscribe(items => {
@@ -28,5 +29,11 @@ export class Cart implements OnInit {
 
   removeItem(productId: number): void {
     this.cartService.removeFromCart(productId);
+  }
+
+  goBack(): void {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/']);
+    });
   }
 }

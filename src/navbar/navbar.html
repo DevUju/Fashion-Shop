@@ -12,7 +12,7 @@
         <div class="cart-section">
             <div class="cart-button">
                 <span><a routerLink="/cart"><span class="cart-icon">🛒</span></a></span>
-                <!-- <span class="cart-badge" *ngIf="cartCounter() > 0">{{ getTotalCart }}</span> -->
+                <span class="cart-badge" *ngIf="getCartTotal() >= 0">{{ getCartTotal() }}</span>
             </div>
         </div>
     </div>

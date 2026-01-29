@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,19 +8,25 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   private cartItems: any[] = [];
   private cartSubject = new BehaviorSubject<any[]>([]);
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   cart$ = this.cartSubject.asObservable();
 
   constructor() {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      this.cartItems = JSON.parse(savedCart);
-      this.cartSubject.next(this.cartItems);
+    if (this.isBrowser) {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+        this.cartItems = JSON.parse(savedCart);
+        this.cartSubject.next(this.cartItems);
+      }
     }
   }
 
   private updateLocalStorage() {
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    if (this.isBrowser) {
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    }
   }
 
   addToCart(product: any) {
@@ -47,6 +54,12 @@ export class CartService {
   clearCart() {
     this.cartItems = [];
     this.cartSubject.next(this.cartItems);
-    localStorage.removeItem('cart'); 
+    if (this.isBrowser) {
+      localStorage.removeItem('cart');
+    }
+  }
+
+  getTotalItems(): number {
+    return this.cartItems.reduce((total, item) => total + item.quantity, 0);
   }
 }

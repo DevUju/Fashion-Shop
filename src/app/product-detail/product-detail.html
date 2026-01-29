@@ -54,7 +54,7 @@
                     <span class="btn-icon">🛒</span>
                     <span >{{ selectedProduct()?.instock ? 'Add to Cart' : 'Out of Stock' }}</span>
                 </button>
-                <button class="btn-back" routerLink="/">
+                <button class="btn-back" (click)="goBack()">
                     <span class="btn-icon">←</span>
                     <span>Back to Products</span>
                 </button>

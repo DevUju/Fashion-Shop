@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { IProductList } from '../shared/interfaces/products.interface';
 import { CommonModule } from '@angular/common';
 
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './product-list.html',
   styleUrls: ['./product-list.css'],
 })
-export class ProductList implements OnInit {
+export class ProductList {
 
   selectedProductIds: string[] = [];
   selectedProductId: string = '';
@@ -19,8 +19,6 @@ export class ProductList implements OnInit {
   @Output() singleData = new EventEmitter<{productId: string, category: string}>();
 
   constructor() { }
-
-  ngOnInit(): void {}
 
   selectProduct(product: IProductList): void {
     this.productSelected.emit(product);

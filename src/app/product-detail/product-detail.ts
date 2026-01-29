@@ -24,9 +24,7 @@ export class ProductDetail implements OnInit {
     private routerService: Router,
     private ngZone: NgZone,
     private cartService: CartService
-  ) { 
-    console.log('Constructor - isBrowser:', this.isBrowser);
-  }
+  ) { }
   productId: string | null = null;
   category: string | null = null;
   selectedProduct = signal<IProductList | null>(null);
@@ -81,5 +79,11 @@ export class ProductDetail implements OnInit {
       this.routerService.navigate(['/cart']);
     }
     
+  }
+
+  goBack(): void {
+    this.routerService.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.routerService.navigate(['/']);
+    });
   }
 }

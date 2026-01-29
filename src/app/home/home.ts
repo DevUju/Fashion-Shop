@@ -18,16 +18,19 @@ export class Home implements OnInit {
 
   constructor(private router: Router, private productService: ProductService) { }
 
-  prod: IProductList[] = []
   cartCount = signal(0);
-  filteredData: IProductList[] = []
-  allProducts: IProductList[] = []
+  filteredData = signal<IProductList[]>([]);
+  allProducts: IProductList[] = [];
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe((products) => {
-      this.allProducts = products;
-      this.prod = products;
-      this.filteredData = products;
+    this.productService.getAllProducts().subscribe({
+      next: (products) => {
+        this.allProducts = products;
+        this.filteredData.set(products);
+      },
+      error: (error) => {
+        console.error('Error loading products:', error);
+      }
     });
   }
 
@@ -41,15 +44,16 @@ export class Home implements OnInit {
     if (query.length > 0) {
       this.filterProducts(query);
     } else {
-      this.filteredData = this.allProducts;
+      this.filteredData.set(this.allProducts);
     }
   }
 
   filterProducts(query: string): void {
     const lowerQuery = query.toLowerCase();
-    this.filteredData = this.allProducts.filter(product =>
+    const filtered = this.allProducts.filter(product =>
       product.name.toLowerCase().includes(lowerQuery)
     );
+    this.filteredData.set(filtered);
   }
 
   onProductDetails(event: {productId: string, category: string}): void {
