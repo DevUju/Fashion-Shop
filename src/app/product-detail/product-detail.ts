@@ -73,7 +73,7 @@ export class ProductDetail implements OnInit {
   }
 
   addToCart() {
-    const product = this.selectedProduct();   // ✅ call signal to get value
+    const product = this.selectedProduct();  
     if (product) {
       this.cartService.addToCart(product);
       this.routerService.navigate(['/cart']);
