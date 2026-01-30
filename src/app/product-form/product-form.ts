@@ -3,11 +3,10 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import { Router } from '@angular/router';
 import { ProductService } from '../services/product';
 import { CommonModule } from '@angular/common';
-import { Navbar } from '../../navbar/navbar';
 
 @Component({
   selector: 'app-product-form',
-  imports: [ReactiveFormsModule, CommonModule, Navbar],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './product-form.html',
   styleUrls: ['./product-form.css'],
 })
