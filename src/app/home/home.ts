@@ -1,18 +1,20 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IProductList } from '../../shared/interfaces/products.interface';
 import { Navbar } from '../../navbar/navbar';
 import { ProductService } from '../services/product';
 import { ProductList } from '../../product/product-list';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Navbar, ProductList],
+  imports: [CommonModule, Navbar, ProductList, RouterModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
+
 export class Home implements OnInit {
   protected readonly title = signal('fashion-store');
 
@@ -56,7 +58,11 @@ export class Home implements OnInit {
     this.filteredData.set(filtered);
   }
 
-  onProductDetails(event: {productId: string, category: string}): void {
+  onProductDetails(event: { productId: string, category: string }): void {
     this.router.navigate([`/product/${event.productId}/category/${event.category}`]);
+  }
+
+  createNewProduct() {
+    this.router.navigate(['/products/new']);
   }
 }

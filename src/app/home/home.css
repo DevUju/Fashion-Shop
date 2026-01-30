@@ -12,3 +12,26 @@ p {
   color: #666;
   font-size: 16px;
 }
+
+
+.create-product-btn-container {
+  margin: 20px 10px;
+  text-align: left; 
+}
+
+
+.create-product-btn-container .btn {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); 
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.create-product-btn-container .btn:hover {
+  background: #8cb2db; 
+}
