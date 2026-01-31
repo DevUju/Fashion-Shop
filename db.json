@@ -75,6 +75,22 @@
           "weight": "5"
         }
       ]
+    },
+    {
+      "id": "33d1",
+      "name": "High Heeled Shoes",
+      "description": "Female pinted heeled shoes for weddings.",
+      "price": 1000000,
+      "category": "Footwear",
+      "imageUrl": "https://i.pinimg.com/736x/9f/a7/14/9fa7143b49401a93593c76190364714c.jpg",
+      "instock": true,
+      "rating": 4.5,
+      "properties": [
+        {
+          "color": "Cream",
+          "weight": "7"
+        }
+      ]
     }
   ]
 }
