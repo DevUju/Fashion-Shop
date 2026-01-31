@@ -1,62 +1,80 @@
 {
-    "products": [{
-      "id": 1,
+  "products": [
+    {
+      "id": "1",
       "name": "Bangles",
       "description": "Bangles that add grace to every movement. Simple, stylish, and made to shine.",
-      "price": 50000.00,
+      "price": 50000,
       "category": "Jewelry",
       "imageUrl": "../assets/images/bangles.jpg",
       "instock": true,
       "rating": 4.5
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Diamond Earrings",
       "description": "Pure diamonds, perfectly set. Effortless sparkle for every moment.",
-      "price": 100000.00,
+      "price": 100000,
       "category": "Jewelry",
       "imageUrl": "../assets/images/diamond-earrings.jpg",
       "instock": true,
-      "rating": 4.8 
+      "rating": 4.8
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Jewelry",
       "description": "Thoughtfully designed jewelry for everyday elegance. Simple, refined, and unforgettable.",
-      "price": 70000.00,
+      "price": 70000,
       "category": "Jewelry",
       "imageUrl": "../assets/images/jewelry-set.jpg",
       "instock": true,
       "rating": 4.6
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Glass Frame",
       "description": "Frames that define your look. Designed to stand out, built to last.",
-      "price": 30000.00,
+      "price": 30000,
       "category": "Accessories",
       "imageUrl": "../assets/images/glass-frame.jpg",
       "instock": true,
       "rating": 4.3
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Wedding Rings",
       "description": "Exquisite wedding rings made with devotion. Where commitment meets craftsmanship.",
-      "price": 500000.00,
+      "price": 500000,
       "category": "Jewelry",
       "imageUrl": "../assets/images/wedding-rings.jpg",
-      "instock": true,    
-      "rating": 4.9 
+      "instock": true,
+      "rating": 4.9
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Wrist Watch",
       "description": "Reliable wristwatches for daily wear. Simple, durable, and stylish.",
-      "price": 40000.00,
+      "price": 40000,
       "category": "Accessories",
       "imageUrl": "../assets/images/wristwatch.jpg",
-      "instock": true,  
+      "instock": true,
       "rating": 4.7
-    }]
+    },
+    {
+      "id": "ceeb",
+      "name": "Male Shoe",
+      "description": "A White pair for corporate and traditional attires.",
+      "price": 500000,
+      "category": "Footwear",
+      "imageUrl": "https://i.pinimg.com/736x/fa/6c/75/fa6c75090c3ab5462a3bbdcdb0b6632a.jpg",
+      "instock": true,
+      "rating": 4,
+      "properties": [
+        {
+          "color": "White",
+          "weight": "5"
+        }
+      ]
+    }
+  ]
 }

@@ -62,7 +62,7 @@ export class Home implements OnInit {
     this.router.navigate([`/product/${event.productId}/category/${event.category}`]);
   }
 
-  // createNewProduct() {
-  //   this.router.navigate(['/products/new']);
-  // }
+  createNewProduct() {
+    this.router.navigate(['/products/new']);
+  }
 }

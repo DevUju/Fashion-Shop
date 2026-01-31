@@ -36,7 +36,7 @@ export class ProductForm implements OnInit {
         Validators.required,
         Validators.pattern('https?://.+')
       ]],
-      inStock: [false],
+      instock: [false],
       rating: [0, [Validators.min(0), Validators.max(5)]],
       properties: this.fb.array([this.createProperty()])
     });
