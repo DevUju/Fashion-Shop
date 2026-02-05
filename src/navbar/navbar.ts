@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Search } from './search/search';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../app/services/cart';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class Navbar implements OnInit {
 
   getCartTotal = signal<number>(0);
 
-  @Input() cartCounter!: Signal<number>;
+  @Input() cartCounter$!: Observable<number>; 
   @Output() getSearchQueryNav = new EventEmitter<string>();
 
   constructor(private cartService: CartService) {}

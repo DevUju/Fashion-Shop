@@ -1,6 +1,6 @@
 <!-- Debug: isLoading={{isLoading()}}, hasProduct={{!!selectedProduct()}} -->
 
-<app-navbar [cartCounter]="cartCounter"></app-navbar>
+<app-navbar [cartCounter$]="cartCounter$"></app-navbar>
 
 
 <div class="loading-state" *ngIf="isLoading()">

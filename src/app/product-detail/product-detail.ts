@@ -6,6 +6,7 @@ import { IProductList } from '../../shared/interfaces/products.interface';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../../navbar/navbar';
 import { CartService } from '../services/cart';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,7 +15,7 @@ import { CartService } from '../services/cart';
   styleUrls: ['./product-detail.css'],
 })
 export class ProductDetail implements OnInit {
-  cartCounter = signal<number>(0); 
+  cartCounter$!: Observable<number>; 
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
 

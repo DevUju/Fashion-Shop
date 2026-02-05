@@ -3,6 +3,7 @@ import { CartService } from '../services/cart';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../../navbar/navbar';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart.css']
 })
 export class Cart implements OnInit {
-  cartCounter = signal<number>(0); 
+  cartCounter$!: Observable<number>; 
   cartItems: any[] = [];
 
   constructor(private cartService: CartService, private router: Router) { }

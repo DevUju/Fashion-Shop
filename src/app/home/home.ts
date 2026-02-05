@@ -1,10 +1,13 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IProductList } from '../../shared/interfaces/products.interface';
 import { Navbar } from '../../navbar/navbar';
 import { ProductService } from '../services/product';
 import { ProductList } from '../../product/product-list';
+import { Observable } from 'rxjs';
+import { State } from '../services/state';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -18,47 +21,53 @@ import { ProductList } from '../../product/product-list';
 export class Home implements OnInit {
   protected readonly title = signal('fashion-store');
 
-  constructor(private router: Router, private productService: ProductService) { }
+  @Input() data: IProductList[] = []
 
-  cartCount = signal(0);
-  filteredData = signal<IProductList[]>([]);
-  allProducts: IProductList[] = [];
+  products$!: Observable<IProductList[]>;
+  loading$!: Observable<boolean>;
+  error$!: Observable<string | null>;
+  cartCount$!: Observable<number>;
+
+
+  constructor(private router: Router, private productService: ProductService, private state: State) { }
 
   ngOnInit(): void {
+
+    this.cartCount$ = this.state.cartCount$;
+    this.products$ = this.state.products$;
+    this.loading$ = this.state.loading$;
+    this.error$ = this.state.error$;
+
+    this.state.setLoading(true);
     this.productService.getAllProducts().subscribe({
-      next: (products) => {
-        this.allProducts = products;
-        this.filteredData.set(products);
+      next: products => {
+        this.state.setProducts(products);
+        this.state.setLoading(false);
       },
-      error: (error) => {
-        console.error('Error loading products:', error);
+      error: err => {
+        this.state.setError(err);
+        this.state.setLoading(false);
       }
     });
   }
 
+  
   onProductSelected(product: IProductList): void {
-    if (product) {
-      this.cartCount.update(count => count + 1);
-    }
+    this.state.addToCart(product); 
   }
 
   onSearchApp(query: string): void {
     if (query.length > 0) {
-      this.filterProducts(query);
+      const lowerQuery = query.toLowerCase();
+      this.products$ = this.state.products$.pipe(
+        map(products => products.filter(p => p.name.toLowerCase().includes(lowerQuery)))
+      );
     } else {
-      this.filteredData.set(this.allProducts);
+      this.products$ = this.state.products$;
     }
   }
 
-  filterProducts(query: string): void {
-    const lowerQuery = query.toLowerCase();
-    const filtered = this.allProducts.filter(product =>
-      product.name.toLowerCase().includes(lowerQuery)
-    );
-    this.filteredData.set(filtered);
-  }
-
-  onProductDetails(event: { productId: string, category: string }): void {
+  onProductDetails(event: { productId: string; category: string }): void {
     this.router.navigate([`/product/${event.productId}/category/${event.category}`]);
   }
 
