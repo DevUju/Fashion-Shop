@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IProductList } from '../shared/interfaces/products.interface';
 import { CommonModule } from '@angular/common';
-import { State } from '../app/services/state';
+import { State } from '../app/services/state/state';
 import { Observable } from 'rxjs';
 
 
@@ -20,6 +20,13 @@ export class ProductList implements OnInit {
   @Output() productSelected = new EventEmitter<IProductList>();
   @Output() singleData = new EventEmitter<{ productId: string, category: string }>();
 
+  get loading$() {
+    return this.state.loading$;
+  }
+
+  get error$() {
+    return this.state.error$;
+  }
 
   constructor(private state: State) { }
 

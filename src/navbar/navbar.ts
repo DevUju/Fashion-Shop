@@ -2,7 +2,7 @@ import { Component, Output, Input, EventEmitter, Signal, OnInit, signal } from '
 import { CommonModule } from '@angular/common';
 import { Search } from './search/search';
 import { RouterLink } from '@angular/router';
-import { CartService } from '../app/services/cart';
+import { CartService } from '../app/services/cart/cart';
 import { Observable } from 'rxjs';
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, OnInit, signal, NgZone, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
-import { ProductService } from '../services/product';
+import { ProductService } from '../services/product/product';
 import { IProductList } from '../../shared/interfaces/products.interface';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../../navbar/navbar';
-import { CartService } from '../services/cart';
+import { CartService } from '../services/cart/cart';
 import { Observable } from 'rxjs';
 
 @Component({

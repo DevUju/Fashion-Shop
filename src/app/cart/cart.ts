@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { CartService } from '../services/cart';
+import { CartService } from '../services/cart/cart';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../../navbar/navbar';
 import { Router } from '@angular/router';

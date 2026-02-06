@@ -1,5 +1,16 @@
 <div>
-    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <!-- Loading State -->
+    <div *ngIf="loading$ | async" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error$ | async as error" class="error-state">
+        {{ error }}
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" [class.form-disabled]="loading$ | async">
 
         <!-- Name Field -->
         <label>Name</label>

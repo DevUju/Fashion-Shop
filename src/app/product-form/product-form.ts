@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProductService } from '../services/product';
+import { ProductService } from '../services/product/product';
 import { CommonModule } from '@angular/common';
-import { State } from '../services/state';
+import { State } from '../services/state/state';
 import { catchError, Observable } from 'rxjs';
-import { ErrorHandler } from '../services/error-handler';
+import { ErrorHandler } from '../services/error-handling/error-handler';
 
 @Component({
   selector: 'app-product-form',
@@ -17,13 +17,14 @@ export class ProductForm implements OnInit {
 
   productForm!: FormGroup;
   imageError = false;
-  // loading$!: Observable<boolean>
-  // products$ = this.state$.asObservable().pipe(map(s => s.products));
-  // cart$ = this.state$.asObservable().pipe(map(s => s.cart));
-  // cartCount$ = this.cart$.pipe(map(cart => cart.length));
-  // error$ = this.state$.asObservable().pipe(map(s => s.error));
-  // selectedProductIds$ = this.state$.asObservable().pipe(map(s => s.selectedProductIds));
 
+  get loading$() {
+    return this.state.loading$;
+  }
+
+  get error$() {
+    return this.state.error$;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -87,40 +88,32 @@ export class ProductForm implements OnInit {
       return;
     }
 
+    this.state.setLoading(true);
+    this.state.setError(null);
+
+    const product = this.productForm.value;
+
+    this.productService.createProduct(product).pipe(
+      catchError(err => {
+        this.state.setLoading(false);
+        this.state.setError(err);
+        throw err;
+      })
+    ).subscribe({
+      next: (newProduct) => {
+        this.state.addProduct(newProduct);
+        this.state.setLoading(false);
+        this.productForm.reset();
+        this.properties.clear();
+        this.addProperty();
+        this.router.navigate(['']);
+      },
+      error: () => {
+      }
+    });
   }
 
 }
 
-//   onSubmit() {
-//     this.loading$ = this.state.loading$;
-//     this.productService.createProduct(this.productForm.value).pipe(
-//       catchError(err => {
-//         this.errorHandler.handleError(err); // logs or transforms error
-//         this.state.setError('Failed to create product'); // update global error state
-//         this.loading$ = false;
-//         return EMPTY;
-//       })
-//     ).subscribe(newProduct => {
-//       const currentProducts = this.state$.value.products;
-//       this.state.setProducts([...currentProducts, newProduct]);
-//       this.loading = false;
-//     });
-//   }
 
-
-//   const product = this.productForm.value;
-
-//     this.productService.createProduct(product).subscribe({
-//     next: () => {
-//       alert('Product created successfully!');
-//       this.productForm.reset();
-//       this.properties.clear();
-//       this.addProperty();
-//       this.router.navigate(['']);
-//     },
-//     error: () => {
-//       alert('Failed to create product');
-//     }
-//   });
-//   }
 

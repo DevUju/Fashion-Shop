@@ -97,3 +97,46 @@ input[type="checkbox"] {
   width: auto;
   margin-right: 8px;
 }
+
+.loading-state {
+  max-width: 600px;
+  margin: 40px auto 20px;
+  padding: 20px;
+  background: #e3f2fd;
+  border-radius: 8px;
+  text-align: center;
+  color: #1565c0;
+  font-weight: 600;
+}
+
+.spinner {
+  border: 4px solid #bbdefb;
+  border-top: 4px solid #1565c0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-state {
+  max-width: 600px;
+  margin: 40px auto 20px;
+  padding: 16px;
+  background: #ffebee;
+  border: 1px solid #ef5350;
+  border-radius: 8px;
+  color: #c62828;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
