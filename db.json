@@ -91,8 +91,22 @@
           "weight": "7"
         }
       ]
-    }
-   
+    },
+    {
+      "id": "b5b0",
+      "name": "Hand Bag",
+      "description": "A fancy hand bag for official and unofficial purposes",
+      "price": 40000,
+      "category": "Bags",
+      "imageUrl": "https://thumbs.dreamstime.com/z/paris-france-september-chanel-boutique-window-displays-designer-handbags-luxury-accessories-rue-cambon-407429988.jpg?ct=jpeg",
+      "instock": true,
+      "rating": 3.6,
+      "properties": [
+        {
+          "color": "Pink and Black",
+          "weight": "2"
+        }
       ]
     }
-  
+  ]
+}
