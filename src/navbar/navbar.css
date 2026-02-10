@@ -96,6 +96,26 @@
     border: 2px solid white;
 }
 
+.user-section {
+    list-style: none;
+    margin-right: 5px;
+}
+
+.user-section button {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-section button:hover {
+    background: #8cb2db; 
+}
+
 @media (max-width: 968px) {
     .navbar-container {
         padding: 12px 20px;
@@ -144,5 +164,3 @@
         font-size: 1.5rem;
     }
 }
-
-

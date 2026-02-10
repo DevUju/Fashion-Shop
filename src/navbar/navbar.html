@@ -4,16 +4,22 @@
             <img src="../assets/images/fashion-logo.jpg" alt="Fashion Shop Logo" class="logo">
             <h1 class="brand-name">Fashion Shop</h1>
         </div>
-        
+
         <div class="search-section">
             <app-search (searchQuery)="onSearchNav($event)"></app-search>
         </div>
-        
+
         <div class="cart-section">
             <div class="cart-button">
                 <span><a routerLink="/cart"><span class="cart-icon">🛒</span></a></span>
                 <span class="cart-badge" *ngIf="getCartTotal() >= 0">{{ getCartTotal() }}</span>
             </div>
         </div>
+        <div class="user-section">
+            <li *ngIf="auth.isLoggedIn()">
+                <button (click)="logout()">Logout</button>
+            </li>
+        </div>
+
     </div>
 </header>
