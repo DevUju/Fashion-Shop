@@ -107,6 +107,23 @@
           "weight": "2"
         }
       ]
+    },
+    {
+      "id": "b292",
+      "name": "Socks",
+      "description": "For feet and the hand",
+      "price": 5000,
+      "category": "Wears",
+      "imageUrl": "https://media.istockphoto.com/id/1149383049/photo/red-white-striped-socks.jpg?s=612x612&w=0&k=20&c=XB-wXbEmuWqE4laHKT7ZvXdHlkkUCwq5uvA0xsk_Auk=",
+      "instock": true,
+      "rating": 3.6,
+      "properties": [
+        {
+          "color": "Red and White",
+          "weight": "1"
+        }
+        
+      ]
     }
   ]
 }
