@@ -1,18 +1,25 @@
 import { Routes } from '@angular/router';
-
-import { Home } from './home/home';
-import { Cart } from './cart/cart';
-import { Notfound } from './notfound/notfound';
-import { ProductDetail } from './product-detail/product-detail';
-import { ProductForm } from './product-form/product-form';
 import { authGuard } from './auth-guard'
-import { Login } from './login/login';
 
 export const routes: Routes = [
-    { path: '', component: Home, canActivate: [authGuard] },
-    { path: 'product/:id/category/:name', canActivate: [authGuard], component: ProductDetail },
-    { path: 'cart', canActivate: [authGuard], component: Cart },
-    { path: 'products/new', canActivate: [authGuard], component: ProductForm },
-    { path: 'login', component: Login },
-    { path: '**', component: Notfound }
+    { path: '', 
+        canActivate: [authGuard],
+        loadComponent: () => import('./home/home').then(m => m.Home)
+     },
+    { path: 'product/:id/category/:name', 
+        canActivate: [authGuard],
+        loadComponent: () => import('./product-detail/product-detail').then(m => m.ProductDetail)
+    },
+    { path: 'cart', 
+        canActivate: [authGuard], 
+        loadComponent: () => import('./cart/cart').then(m => m.Cart) },
+    { path: 'products/new', 
+        canActivate: [authGuard], 
+        loadComponent: () => import('./product-form/product-form').then(m => m.ProductForm) 
+    },
+    { path: 'login', 
+        loadComponent: () => import('./login/login').then(m => m.Login) },
+    { path: '**', 
+        loadComponent: () => import('./notfound/notfound').then(m => m.Notfound) 
+    }
 ];
