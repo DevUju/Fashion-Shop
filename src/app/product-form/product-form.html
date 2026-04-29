@@ -60,7 +60,7 @@
         <app-category-select
             [selectedCategoryId]="productForm.get('categoryId')?.value"
             (selectedCategoryIdChange)="
-                productForm.get('categoryId')?.setValue(Number($event));
+                productForm.get('categoryId')?.setValue($event);
                 productForm.get('categoryId')?.markAsTouched();
             ">
         </app-category-select>
