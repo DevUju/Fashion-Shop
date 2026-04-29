@@ -11,7 +11,7 @@
 </select> -->
 
 <select [(ngModel)]="selectedCategoryId" (ngModelChange)="onChange($event)">
-  <option *ngFor="let category of categories$ | async" [value]="category.id">
+  <option *ngFor="let category of categories$ | async" [ngValue]="category.id">
     {{ category.name }}
   </option>
 </select>

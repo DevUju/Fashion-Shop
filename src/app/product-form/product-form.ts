@@ -109,6 +109,8 @@ export class ProductForm implements OnInit {
       properties: raw.properties?.map((p: any) => ({ key: p.color, value: p.weight })),
     };
 
+    console.log('Submitting product:', product);
+
     this.productService
       .createProduct(product)
       .pipe(
