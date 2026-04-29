@@ -22,13 +22,8 @@ export class CategoryComponent implements OnInit {
     this.categories$ = this.categoryService.getCategories();
   }
 
-  // onChange(value: number) {
-  //   this.selectedCategoryId = value;
-  //   this.selectedCategoryIdChange.emit(value);
-  // }
-
   onChange(value: number) {
-    console.log('CHILD EMIT:', value, typeof value);
+    this.selectedCategoryId = value;
     this.selectedCategoryIdChange.emit(value);
   }
 }
