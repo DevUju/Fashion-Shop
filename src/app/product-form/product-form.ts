@@ -34,7 +34,7 @@ export class ProductForm implements OnInit {
     private productService: ProductService,
     private state: State,
     private errorHandler: ErrorHandler,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
   ) {}
 
   ngOnInit(): void {
@@ -103,7 +103,7 @@ export class ProductForm implements OnInit {
     const product = {
       ...raw,
       price: Number(raw.price),
-      categoryId: Number(raw.categoryId),
+      categoryId: typeof raw.categoryId === 'object' ? raw.categoryId.id : Number(raw.categoryId),
       rating: Number(raw.rating),
       instock: Boolean(raw.instock),
       properties: raw.properties?.map((p: any) => ({ key: p.color, value: p.weight })),
